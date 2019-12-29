@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 
 /**
- * No.003 Longest Substring Without Repeating Characters
+ * No.3 Longest Substring Without Repeating Characters
  * https://leetcode.com/problems/longest-substring-without-repeating-characters/submissions/
  */
 class Solution {
