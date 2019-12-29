@@ -11,14 +11,25 @@ import org.junit.jupiter.api.DisplayName;
 
 class SolutionTest {
 
-    @DisplayName("例題")
+    private Solution solution = new Solution();
+
+    @DisplayName("ExampleTest")
     @ParameterizedTest
     @CsvSource({
-        "abcabcab, 3",
+        "abcabcbb, 3",
         "bbbbb, 1",
         "pwwkew, 3", 
     })
     void exampleTest(String inputValue, int expect) {
-        assertEquals(new Solution().lengthOfLongestSubstring(inputValue), expect);
+        assertEquals(solution.lengthOfLongestSubstring(inputValue), expect);
+    }
+
+    @DisplayName("SubmitTest")
+    @ParameterizedTest
+    @CsvSource({
+        "cdd, 2",
+    })
+    void submitTest(String inputValue, int expect) {
+        assertEquals(solution.lengthOfLongestSubstring(inputValue), expect);
     }
 }
