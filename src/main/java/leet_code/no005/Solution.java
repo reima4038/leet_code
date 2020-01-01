@@ -1,7 +1,6 @@
 package leet_code.no005;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -49,13 +48,10 @@ public class Solution {
         while(i < s.length()) {
             if(i == MAX_LENGTH) {
                 break;
-            }
-            String string = listToString.apply(list);
-            if(isPalindrome.negate().test(string) &&  (j < s.length() || j == MAX_LENGTH)) {
+            } else if(j < s.length() || j == MAX_LENGTH) {
                 list.add(s.charAt(j++));
-            } else if(isPalindrome.test(string) && (j < s.length() || j == MAX_LENGTH)){
-                answer = preferLongLengthValue(answer, string);
-                list.add(s.charAt(j++));
+                String string = listToString.apply(list);
+                answer = isPalindrome.test(string) ? preferLongLengthValue(answer, string) : answer;
             } else {
                 list.clear();
                 i++;
