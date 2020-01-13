@@ -12,6 +12,8 @@ import java.util.stream.Stream;
       public String convert(String s, int numRows) {
          if(numRows <= 0) {
             return EMPTY_VALUE;
+         } else if(numRows == 1) {
+            return s;
          }
 
          StringBuilder[] strs = new StringBuilder[numRows];

@@ -37,4 +37,19 @@ import org.junit.jupiter.api.Test;
          final String expected = "PINALSIGYAHRPI";
          assertEquals(expected, actual);
       }
+
+      @Test
+      void example3Test() {
+         // given
+         final String s = "AB";
+         final int numRows = 1;
+
+                  // when
+                  String actual = solution.convert(s, numRows);
+
+                  // then
+                  final String expected = "AB";
+                  assertEquals(expected, actual);
+
+      }
    }
