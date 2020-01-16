@@ -15,7 +15,8 @@ public class Solution {
    public int myAtoi(String str) {
       return Optional.ofNullable(str)
          .map(removeWhiteSpace)
-         .filter(isFirstCharactorNumericalValue)
+         .filter(isFirstCharactorNumericalValueOrSign)
+         .filter(isNotOnlySign)
          .map(removeNotNumericalDigits)
          .map(limitIntMinMaxValue)
          .map(Integer::valueOf)
@@ -23,7 +24,7 @@ public class Solution {
    }
 
    private Function<String, String> removeWhiteSpace = String::trim;
-   private Predicate<String> isFirstCharactorNumericalValue = s -> {
+   private Predicate<String> isFirstCharactorNumericalValueOrSign = s -> {
       final String numericalValueOrSign = "^[-+0-9]";
       return Pattern.compile(numericalValueOrSign)
          .matcher(s)
@@ -37,12 +38,44 @@ public class Solution {
       final char MINUS = '-';
       return s.charAt(firstDigitIndex) == MINUS ? true : false;
    };
+
+   private Predicate<Character> isSign = ch -> {
+      final char SIGN_MINUS = '-';
+      final char SIGN_PLUS = '+';
+      return ch == SIGN_MINUS || ch == SIGN_PLUS;
+   };
+
+   private Predicate<String> isNotOnlySign = s -> {
+      if(s.isEmpty()) {
+         return false;
+      }
+      return s.length() > 1  ? true : isSign.negate().test(s.charAt(0));
+   };
+
    private Function<String, String> removeNotNumericalDigits = s -> {
-      final String EMPTY = "";
-      final String MINUS = "-";
-      final String notNumericalValue = "[^0-9]";
-      final String removedValue = s.replaceAll(notNumericalValue, EMPTY);
-      return isMinusValue.test(s) ? MINUS + removedValue : removedValue;
+      if(s.isEmpty()) {
+         return s;
+      }
+
+      final Predicate<Character> isNotNumericalValue = ch -> !Character.isDigit(ch);
+      final int initialValue = -1;
+      int firstNotNumericalIndex = initialValue;
+      for(int i = 0; i < s.length(); i++) {
+         if(i == 0 && isSign.test(s.charAt(i))) {
+            continue;
+         }
+         if(isNotNumericalValue.test(s.charAt(i))) {
+            firstNotNumericalIndex = i;
+            break;
+         }
+      }
+
+      if(firstNotNumericalIndex == initialValue) {
+         return s;
+      } else {
+         final int firstDigitIndex = 0;
+         return s.substring(firstDigitIndex, firstNotNumericalIndex);
+      }
    };
    private Predicate<String> isInIntegerRange = s -> {
       try {

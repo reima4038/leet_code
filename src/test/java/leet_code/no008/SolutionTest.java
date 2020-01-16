@@ -70,6 +70,28 @@ public class SolutionTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void submit1Test() {
+        // given
+        final String str = "3.14159";
+        
+        // when
+        final int actual = solution.myAtoi(str);
+        // then
+        final int expected = 3;
+        assertEquals(expected, actual);
+    }
 
+    @Test
+    void submit2Test() {
+        // given
+        final String str = "+";
+                
+        // when
+        final int actual = solution.myAtoi(str);
+        // then
+        final int expected = 0;
+        assertEquals(expected, actual);
+    }
     
 }
