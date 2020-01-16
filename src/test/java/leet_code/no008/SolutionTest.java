@@ -93,5 +93,17 @@ public class SolutionTest {
         final int expected = 0;
         assertEquals(expected, actual);
     }
+
+    @Test
+    void submit3Test() {
+        // given
+        final String str = "+-2";
+        
+        // when
+        final int actual = solution.myAtoi(str);
+        // then
+        final int expected = 0;
+        assertEquals(expected, actual);
+    }
     
 }

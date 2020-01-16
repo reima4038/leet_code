@@ -18,6 +18,7 @@ public class Solution {
          .filter(isFirstCharactorNumericalValueOrSign)
          .filter(isNotOnlySign)
          .map(removeNotNumericalDigits)
+         .map(emptyToZero)
          .map(limitIntMinMaxValue)
          .map(Integer::valueOf)
          .orElse(ZERO);
@@ -49,7 +50,13 @@ public class Solution {
       if(s.isEmpty()) {
          return false;
       }
-      return s.length() > 1  ? true : isSign.negate().test(s.charAt(0));
+      boolean isSignOnly = true;
+      for(int i = 0; i < s.length(); i++) {
+         if(isSign.negate().test(s.charAt(i))) {
+            isSignOnly = false;
+         }
+      }
+      return !isSignOnly;
    };
 
    private Function<String, String> removeNotNumericalDigits = s -> {
@@ -74,7 +81,9 @@ public class Solution {
          return s;
       } else {
          final int firstDigitIndex = 0;
-         return s.substring(firstDigitIndex, firstNotNumericalIndex);
+         final String sub = s.substring(firstDigitIndex, firstNotNumericalIndex);
+         final String EMPTY = "";
+         return isNotOnlySign.test(sub) ? sub : EMPTY;
       }
    };
    private Predicate<String> isInIntegerRange = s -> {
@@ -92,6 +101,10 @@ public class Solution {
          final int value = isMinusValue.test(s) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
          return String.valueOf(value);
       } 
-   }; 
+   };
+   private Function<String, String> emptyToZero = s -> {
+      final String zero = "0";
+      return s.isEmpty() ? zero : s;
+   };
 
 }
