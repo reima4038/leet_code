@@ -14,7 +14,10 @@ import java.util.List;
                return false;
             }
             
-            if(i > 0 && Bracket.isEndBracket(s.charAt(i))){
+            if(Bracket.isEndBracket(s.charAt(i)) && chars.size() > 0){
+               if(chars.size() == 0) {
+                  return false;
+               }
                final int charsLastIndex = chars.size() - 1;
                final char lastStackCharactors = chars.get(charsLastIndex);
                final char nextCompareTarget = s.charAt(i);
@@ -27,7 +30,7 @@ import java.util.List;
                chars.add(s.charAt(i));
             }
          }
-         return true;
+         return chars.size() > 0 ? false : true;
       }
 
       private enum Bracket {

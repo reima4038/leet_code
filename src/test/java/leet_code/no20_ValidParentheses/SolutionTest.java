@@ -64,4 +64,29 @@ public class SolutionTest {
         final boolean expected = true;
         assertEquals(expected, actual);
     }
+
+    @Test
+    void submit1Test() {
+        // given"
+        final String s = "["; 
+        // when
+        final boolean actual = solution.isValid(s);
+        // then
+        final boolean expected = false;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void submit2Test() {
+        // given"
+        final String s = "[])"; 
+        // when
+        final boolean actual = solution.isValid(s);
+        // then
+        final boolean expected = false;
+        assertEquals(expected, actual);
+    }
+
+
+    
 }
