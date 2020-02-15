@@ -1,5 +1,6 @@
 import os
 import yaml
+import re
 
 with open('properties.yml', 'r') as f:
     prop = yaml.safe_load(f)
@@ -15,7 +16,9 @@ def makeFile(path, body):
     f.close()
 
 print('type the creating directory name.')
-dirName = input().strip()
+input_val = input().strip()
+space_omitted = re.sub('\s', '_', input_val)
+dirName = 'no' + re.sub('\.', '', space_omitted)
 
 print('now creating dirctories...')
 os.makedirs(ROOT_DIR + SRC_CODE_DIR + dirName)
@@ -27,6 +30,7 @@ body = [
     'package leet_code.' + dirName + ';' + BREAK_LINE,
     BREAK_LINE,
     '/**' + BREAK_LINE,
+    ' * ' + input_val + BREAK_LINE,
     ' * https://leetcode.com/problems/' + BREAK_LINE,
     ' */' + BREAK_LINE,
     'public class Solution {' + BREAK_LINE,
@@ -39,6 +43,7 @@ bodyTest = [
     'import org.junit.jupiter.api.Test;' + BREAK_LINE,
     BREAK_LINE,
     '/**' + BREAK_LINE,
+    ' * ' + input_val + BREAK_LINE,
     ' * https://leetcode.com/problems/' + BREAK_LINE,
     ' */' + BREAK_LINE,
     'public class SolutionTest {' + BREAK_LINE,
