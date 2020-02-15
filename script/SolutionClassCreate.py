@@ -26,11 +26,11 @@ print('making solution class files.')
 body = [
     'package leet_code.' + dirName + ';' + BREAK_LINE,
     BREAK_LINE,
-    '   /**' + BREAK_LINE,
-    '    * https://leetcode.com/problems/' + BREAK_LINE,
-    '    */' + BREAK_LINE,
-    '   public class Solution {' + BREAK_LINE,
-    '   }' + BREAK_LINE
+    '/**' + BREAK_LINE,
+    ' * https://leetcode.com/problems/' + BREAK_LINE,
+    ' */' + BREAK_LINE,
+    'public class Solution {' + BREAK_LINE,
+    '}' + BREAK_LINE
 ]
 bodyTest = [
     'package leet_code.' + dirName + ';' + BREAK_LINE,
